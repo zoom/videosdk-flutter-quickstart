@@ -4,6 +4,8 @@ Use of this sample app is subject to our [Terms of Use](https://explore.zoom.us/
 
 A Flutter application demonstrating integration with the Zoom Video SDK for creating video conferencing capabilities in a mobile application.
 
+![](screenshot.png)
+
 ## Prerequisites
 
 - Flutter SDK (^3.6.1)
