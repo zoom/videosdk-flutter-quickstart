@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:zoom_flutter_hello_world/config.dart';
 import 'package:zoom_flutter_hello_world/utils/jwt.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_zoom_videosdk/native/zoom_videosdk.dart';
 import 'package:flutter_zoom_videosdk/native/zoom_videosdk_user.dart';
-import 'package:flutter_zoom_videosdk/native/zoom_videosdk_event_listener.dart';
 import 'package:flutter_zoom_videosdk/flutter_zoom_view.dart' as zoom_view;
+import 'package:flutter_zoom_videosdk/native/zoom_videosdk_event_listener.dart';
 
 class Videochat extends StatefulWidget {
   const Videochat({super.key});
@@ -23,6 +25,22 @@ class _VideochatState extends State<Videochat> {
   bool isMuted = true;
   bool isVideoOn = false;
   bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isAndroid) {
+      _checkPermissions();
+    }
+  }
+
+  Future<void> _checkPermissions() async {
+    await Permission.camera.request();
+    await Permission.microphone.request();
+    final camera = await Permission.camera.status;
+    final mic = await Permission.microphone.status;
+    debugPrint('Camera permission: $camera, Microphone permission: $mic');
+  }
 
   _handleSessionJoin(data) async {
     if (!mounted) return;
