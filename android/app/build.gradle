@@ -40,9 +40,9 @@ android {
 }
 
 dependencies {
-    implementation "us.zoom.videosdk:zoomvideosdk-core:2.1.10"
-    implementation "us.zoom.videosdk:zoomvideosdk-videoeffects:2.1.10"
-    implementation "us.zoom.videosdk:zoomvideosdk-annotation:2.1.10"
+    implementation "us.zoom.videosdk:zoomvideosdk-core:2.3.0"
+    implementation "us.zoom.videosdk:zoomvideosdk-videoeffects:2.3.0"
+    implementation "us.zoom.videosdk:zoomvideosdk-annotation:2.3.0"
 }
 
 flutter {

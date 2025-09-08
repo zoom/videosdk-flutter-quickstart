@@ -2,16 +2,16 @@ PODS:
   - Flutter (1.0.0)
   - flutter_zoom_videosdk (0.0.1):
     - Flutter
-    - ZoomVideoSDK/CptShare (= 2.1.10)
-    - ZoomVideoSDK/zm_annoter_dynamic (= 2.1.10)
-    - ZoomVideoSDK/zoomcml (= 2.1.10)
-    - ZoomVideoSDK/ZoomVideoSDK (= 2.1.10)
+    - ZoomVideoSDK/CptShare (= 2.3.0)
+    - ZoomVideoSDK/zm_annoter_dynamic (= 2.3.0)
+    - ZoomVideoSDK/zoomcml (= 2.3.0)
+    - ZoomVideoSDK/ZoomVideoSDK (= 2.3.0)
   - permission_handler_apple (9.3.0):
     - Flutter
-  - ZoomVideoSDK/CptShare (2.1.10)
-  - ZoomVideoSDK/zm_annoter_dynamic (2.1.10)
-  - ZoomVideoSDK/zoomcml (2.1.10)
-  - ZoomVideoSDK/ZoomVideoSDK (2.1.10)
+  - ZoomVideoSDK/CptShare (2.3.0)
+  - ZoomVideoSDK/zm_annoter_dynamic (2.3.0)
+  - ZoomVideoSDK/zoomcml (2.3.0)
+  - ZoomVideoSDK/ZoomVideoSDK (2.3.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -31,11 +31,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_zoom_videosdk: 4096c66044528508de671e10e777631431a82842
-  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
-  ZoomVideoSDK: 94e939820e57a075c5e712559f927017da0de06a
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_zoom_videosdk: d46fba88a0033042de90c77a3ac90b4d79ab130c
+  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
+  ZoomVideoSDK: e58f52e5f1d6c4bc46bcc7bd6875f916135fa2a2
 
-PODFILE CHECKSUM: 095d9af8b13ecba9b7619a234542d1b32779cac5
+PODFILE CHECKSUM: 92906b04914919e75004799b609448ddd7c0a72e
 
 COCOAPODS: 1.16.2
