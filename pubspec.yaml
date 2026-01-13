@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   
-  flutter_zoom_videosdk: ^2.3.0
+  flutter_zoom_videosdk: ^2.4.0
   dart_jsonwebtoken: ^2.17.0
   permission_handler: ^11.3.0
 
