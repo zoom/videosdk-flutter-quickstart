@@ -31,31 +31,34 @@ A Flutter application demonstrating integration with the Zoom Video SDK for crea
    flutter pub get
    ```
 
-3. Configure your Zoom SDK credentials:
-   - Open `lib/config.dart`
-   - Replace the placeholder values with your Zoom SDK Key and Secret:
-     ```dart
-     const Map configs = {
-       'ZOOM_SDK_KEY': 'your_zoom_sdk_key',
-       'ZOOM_SDK_SECRET': 'your_zoom_sdk_secret',
-     };
-     ```
-     > **Disclaimer**: It's not recommended to store your credentials in the source code. This is only for demonstration purposes for sake of simplicity. You should use a secure backend to generate the token and pass it to the client.
-   - Customize the session details as needed:
-     ```dart
-     const Map sessionDetails = {
-       'sessionName': 'YourSessionName',
-       'sessionPassword': '',
-       'displayName': 'YourDisplayName',
-       'sessionTimeout': '40',
-       'roleType': '1',
-     };
-     ```
-
-4. Run the application:
+3. Run the application:
    ```
    flutter run
    ```
+## CLI Token Generator
+For development and testing, a Dart CLI script is provided to generate JWT tokens:
+
+1. Setup (one-time):
+   ```bash
+   cd scripts
+   dart pub get
+   ```
+
+2. Create a `.env` file in the project root with your credentials:
+   ```
+   SDK_KEY=your_sdk_key_here
+   SDK_SECRET=your_sdk_secret_here
+   ```
+
+3. Generate tokens:
+   ```bash
+   # Basic usage
+   dart run scripts/generate_token.dart "Session Name" --copy-to-clipboard
+
+   Replace "Session Name" with the name of the session you want to join.
+   The token will be printed to the console.
+   Copy the token and paste it into the JWT token field in the application.
+   Click the "Start Session" button to join the session.
 
 ## Project Structure
 

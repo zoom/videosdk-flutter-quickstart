@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:zoom_flutter_hello_world/config.dart';
-import 'package:zoom_flutter_hello_world/utils/jwt.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_zoom_videosdk/native/zoom_videosdk.dart';
 import 'package:flutter_zoom_videosdk/native/zoom_videosdk_user.dart';
@@ -19,6 +18,7 @@ class Videochat extends StatefulWidget {
 class _VideochatState extends State<Videochat> {
   final zoom = ZoomVideoSdk();
   final eventListener = ZoomVideoSdkEventListener();
+  final jwtController = TextEditingController();
   bool isInSession = false;
   List<StreamSubscription> subscriptions = [];
   List<ZoomVideoSdkUser> users = [];
@@ -85,6 +85,14 @@ class _VideochatState extends State<Videochat> {
     });
   }
 
+  _handleError(data) {
+    debugPrint("Zoom SDK Error: ${data.runtimeType} - $data");
+    if (!mounted) return;
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   _setupEventListeners() {
     subscriptions = [
       eventListener.addListener(EventType.onSessionJoin, _handleSessionJoin),
@@ -93,18 +101,22 @@ class _VideochatState extends State<Videochat> {
       eventListener.addListener(EventType.onUserLeave, _updateUserList),
       eventListener.addListener(EventType.onUserVideoStatusChanged, _handleVideoChange),
       eventListener.addListener(EventType.onUserAudioStatusChanged, _handleAudioChange),
+      eventListener.addListener(EventType.onError, _handleError),
     ];
   }
 
   Future startSession() async {
+    if (jwtController.text.trim().isEmpty) {
+      debugPrint("JWT token is required");
+      return;
+    }
     setState(() => isLoading = true);
     try {
-      final token = generateJwt(sessionDetails['sessionName'], sessionDetails['roleType']);
       _setupEventListeners();
       await zoom.joinSession(JoinSessionConfig(
         sessionName: sessionDetails['sessionName']!,
         sessionPassword: sessionDetails['sessionPassword']!,
-        token: token,
+        token: jwtController.text.trim(),
         userName: sessionDetails['displayName']!,
         audioOptions: {"connect": true, "mute": true},
         videoOptions: {"localVideoOn": true},
@@ -128,6 +140,12 @@ class _VideochatState extends State<Videochat> {
   }
 
   @override
+  void dispose() {
+    jwtController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -136,9 +154,32 @@ class _VideochatState extends State<Videochat> {
           children: [
             if (!isInSession)
               Center(
-                child: ElevatedButton(
-                  onPressed: isLoading ? null : startSession,
-                  child: Text(isLoading ? 'Connecting...' : 'Start Session'),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (isLoading)
+                        const CircularProgressIndicator(color: Colors.white)
+                      else ...[
+                        Text(
+                          'Session: ${sessionDetails['sessionName']}',
+                          style: TextStyle(color: Colors.grey[500], fontSize: 16),
+                        ),
+                        const SizedBox(height: 16),
+                        TextField(
+                          controller: jwtController,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(hintText: 'Enter JWT'),
+                        ),
+                        const SizedBox(height: 24),
+                        ElevatedButton(
+                          onPressed: startSession,
+                          child: const Text('Start Session'),
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
               )
             else
