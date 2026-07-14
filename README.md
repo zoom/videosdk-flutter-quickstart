@@ -8,14 +8,14 @@ A Flutter application demonstrating integration with the Zoom Video SDK for crea
 
 ## Prerequisites
 
-- Flutter SDK (^3.6.1)
-- Dart SDK (^3.6.1)
+- Flutter SDK (3.44.6)
+- Dart SDK (^3.12.2)
 - Zoom Video SDK account and credentials
-- iOS 12.0+ / Android API level 21+
+- iOS 15.0+ / Android API level 28+
 
 ## Dependencies
 
-- `flutter_zoom_videosdk: ^1.14.0` - Zoom Video SDK Flutter plugin
+- `flutter_zoom_videosdk: ^2.5.10` - Zoom Video SDK Flutter plugin
 - `dart_jsonwebtoken: ^2.17.0` - For JWT token generation
 
 ## Setup

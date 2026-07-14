@@ -106,17 +106,17 @@ class _VideochatState extends State<Videochat> {
   }
 
   Future startSession() async {
-    if (jwtController.text.trim().isEmpty) {
-      debugPrint("JWT token is required");
-      return;
-    }
+    // if (jwtController.text.trim().isEmpty) {
+    //   debugPrint("JWT token is required");
+    //   return;
+    // }
     setState(() => isLoading = true);
     try {
       _setupEventListeners();
       await zoom.joinSession(JoinSessionConfig(
         sessionName: sessionDetails['sessionName']!,
         sessionPassword: sessionDetails['sessionPassword']!,
-        token: jwtController.text.trim(),
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfa2V5IjoiendOd2lIeEVUUmVua0w4SEpBbGlQUSIsInRwYyI6IlRlc3RPbmUiLCJyb2xlX3R5cGUiOjEsInZlcnNpb24iOjEsImlhdCI6MTc4NDAyODE4OSwiZXhwIjoxNzg0MDY0MTg5fQ.eI32T5f7uRNk6zHd0camWrE4UOy4pB2yvcA1p-Lhg3g",
         userName: sessionDetails['displayName']!,
         audioOptions: {"connect": true, "mute": true},
         videoOptions: {"localVideoOn": true},
